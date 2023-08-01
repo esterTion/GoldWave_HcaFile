@@ -175,6 +175,7 @@
     <ClInclude Include="src\lib\kawashima\hca\CHcaCipherConverter.h" />
     <ClInclude Include="src\lib\kawashima\hca\CHcaDecoder.h" />
     <ClInclude Include="src\lib\kawashima\hca\CHcaDecoderConfig.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaDecoder_vgmstream.h" />
     <ClInclude Include="src\lib\kawashima\hca\CHcaFormatReader.h" />
     <ClInclude Include="src\lib\kawashima\hca\hca_native.h" />
     <ClInclude Include="src\lib\kawashima\hca\hca_utils.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="src\lib\kawashima\hca\CHcaCipherConverter.cpp" />
     <ClCompile Include="src\lib\kawashima\hca\CHcaDecoder.cpp" />
     <ClCompile Include="src\lib\kawashima\hca\CHcaDecoderConfig.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaDecoder_vgmstream.cpp" />
     <ClCompile Include="src\lib\kawashima\hca\CHcaFormatReader.cpp" />
     <ClCompile Include="src\lib\kawashima\hca\hca_utils.cpp" />
     <ClCompile Include="src\lib\kawashima\hca\internal\CHcaAth.cpp" />

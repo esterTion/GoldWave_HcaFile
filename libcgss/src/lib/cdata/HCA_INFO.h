@@ -70,4 +70,5 @@ typedef struct _HCA_INFO {
      * Offset of audio data. It usually equals to the size of HCA header.
      */
     uint32_t dataOffset;
+    uint32_t random;
 } HCA_INFO;

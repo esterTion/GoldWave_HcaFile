@@ -183,6 +183,9 @@
     <ClInclude Include="src\lib\takamori\Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\lib\kawashima\hca\CHcaDecoder_vgmstream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\capi\cgss_capi.cpp">
@@ -288,6 +291,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\lib\takamori\Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lib\kawashima\hca\CHcaDecoder_vgmstream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

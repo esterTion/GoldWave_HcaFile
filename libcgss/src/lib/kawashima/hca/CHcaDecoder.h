@@ -3,6 +3,7 @@
 #include <map>
 #include "../../cgss_data.h"
 #include "CHcaFormatReader.h"
+#include "CHcaDecoder_vgmstream.h"
 
 CGSS_NS_BEGIN
 
@@ -89,6 +90,7 @@ CGSS_NS_BEGIN
         uint8_t *_hcaBlockBuffer;
         // Position measured by wave output.
         uint64_t _position;
+        stChannel* _channels_vgmstream;
 
     };
 

@@ -62,6 +62,9 @@ CGSS_NS_BEGIN
                 _channels[i] = nullptr;
             }
         }
+        if (_channels_vgmstream) {
+            delete _channels_vgmstream;
+        }
     }
 
     void CHcaDecoder::InitializeExtra() {
@@ -125,12 +128,20 @@ CGSS_NS_BEGIN
             }
         }
         auto *channels = _channels;
+        stChannel* channels_vgmstream = new stChannel[hcaInfo.channelCount];
         for (auto i = 0; i < hcaInfo.channelCount; ++i) {
             channels[i] = new CHcaChannel();
             channels[i]->type = r[i];
             channels[i]->value3 = &channels[i]->value[hcaInfo.compR06 + hcaInfo.compR07];
             channels[i]->count = hcaInfo.compR06 + ((r[i] != 2) ? hcaInfo.compR07 : 0);
+
+            memset(&channels_vgmstream[i], 0, sizeof(stChannel));
+            channels_vgmstream[i].type = (channel_type_t)channels[i]->type;
+            channels_vgmstream[i].coded_count = (channels[i]->type != STEREO_SECONDARY) ?
+                hcaInfo.compR06 + hcaInfo.compR07 :
+                hcaInfo.compR06;
         }
+        _channels_vgmstream = channels_vgmstream;
     }
 
     uint32_t CHcaDecoder::GetWaveHeaderSize() {
@@ -262,6 +273,8 @@ CGSS_NS_BEGIN
         }
 
         // Actual decoding process.
+        /*
+        * Seems got bug with acb 1.40, switch to use code from vgmstream
         auto a = (data.GetBit(9) << 8) - data.GetBit(7);
         for (auto i = 0; i < hcaInfo.channelCount; ++i) {
             CHcaChannel::Decode1(channels[i], &data, hcaInfo.compR09, a, _ath->GetTable());
@@ -280,6 +293,75 @@ CGSS_NS_BEGIN
                 CHcaChannel::Decode5(channels[j], i);
             }
         }
+        */
+        
+        //clHCA_DecodeBlock_unpack
+        clData br;
+        unsigned short sync;
+        unsigned int subframe, ch;
+        bitreader_init(&br, hcaBlockBuffer, hcaInfo.blockSize);
+        bitreader_read(&br, 16);
+        unsigned int hcaInfoVersion = hcaInfo.versionMajor * 0x100 + hcaInfo.versionMinor;
+        stChannel* channels_vgmstream = _channels_vgmstream;
+        /* unpack frame values */
+        {
+            /* lib saves this in the struct since they can stop/resume subframe decoding */
+            unsigned int frame_acceptable_noise_level = bitreader_read(&br, 9);
+            unsigned int frame_evaluation_boundary = bitreader_read(&br, 7);
+
+            unsigned int packed_noise_level = (frame_acceptable_noise_level << 8) - frame_evaluation_boundary;
+
+            for (ch = 0; ch < hcaInfo.channelCount; ch++) {
+                int err = unpack_scalefactors(&channels_vgmstream[ch], &br, hcaInfo.compR09, hcaInfoVersion);
+                if (err < 0)
+                    throw CException(CGSS_OP_DECODE_FAILED);
+
+                unpack_intensity(&channels_vgmstream[ch], &br, hcaInfo.compR09, hcaInfoVersion);
+
+                calculate_resolution(&channels_vgmstream[ch], packed_noise_level, _ath->GetTable(), hcaInfo.compR01, hcaInfo.compR02);
+
+                calculate_gain(&channels_vgmstream[ch]);
+            }
+        }
+
+        /* lib seems to use a state value to skip parts (unpacking/subframe N/etc) as needed */
+        for (subframe = 0; subframe < 8; subframe++) {
+
+            /* unpack channel data and get dequantized spectra */
+            for (ch = 0; ch < hcaInfo.channelCount; ch++) {
+                dequantize_coefficients(&channels_vgmstream[ch], &br, subframe);
+            }
+
+            /* original code transforms subframe here, but we have it for later */
+        }
+
+        //clHCA_DecodeBlock_transform
+        if (br.bit >= 0) {
+            for (subframe = 0; subframe < 8; subframe++) {
+                /* restore missing bands from spectra */
+                for (ch = 0; ch < hcaInfo.channelCount; ch++) {
+                    reconstruct_noise(&channels_vgmstream[ch], hcaInfo.compR01, /*hcaInfo.ms_stereo*/0, (unsigned int*)&hcaInfo.random, subframe);
+
+                    reconstruct_high_frequency(&channels_vgmstream[ch], hcaInfo.compR09, hcaInfo.compR08,
+                        hcaInfo.compR07, hcaInfo.compR06, hcaInfo.compR05, hcaInfoVersion, subframe);
+                }
+
+                /* restore missing joint stereo bands */
+                if (hcaInfo.compR07 > 0) {
+                    for (ch = 0; ch < hcaInfo.channelCount - 1; ch++) {
+                        apply_intensity_stereo(&channels_vgmstream[ch], subframe, hcaInfo.compR06, hcaInfo.compR05);
+
+                        apply_ms_stereo(&channels_vgmstream[ch], /*hcaInfo.ms_stereo*/0, hcaInfo.compR06, hcaInfo.compR05, subframe);
+                    }
+                }
+
+                /* apply imdct */
+                for (ch = 0; ch < hcaInfo.channelCount; ch++) {
+                    imdct_transform(&channels_vgmstream[ch], subframe);
+                }
+            }
+        }
+
 
         // Generate wave data.
         const auto waveBlockBuffer = new uint8_t[waveBlockSize];
@@ -289,7 +371,7 @@ CGSS_NS_BEGIN
             for (auto i = 0; i < 8; ++i) {
                 for (auto j = 0; j < 0x80; ++j) {
                     for (auto k = 0; k < hcaInfo.channelCount; ++k) {
-                        auto f = channels[k]->wave[i][j] * hcaInfo.rvaVolume;
+                        auto f = channels_vgmstream[k].wave[i][j] * hcaInfo.rvaVolume;
                         f = clamp(f, -1.0f, 1.0f);
                         cursor = decodeFunc(f, waveBlockBuffer, cursor);
                     }

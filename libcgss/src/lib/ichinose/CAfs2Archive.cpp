@@ -72,10 +72,11 @@ void CAfs2Archive::Initialize() {
     _byteAlignment = byteAlignment & 0xffff;
     _hcaKeyModifier = static_cast<uint16_t>(byteAlignment >> 16);
 
-    auto version = reader.PeekUInt32LE(offset + 4);
+    auto version = reader.PeekUInt8(offset + 4);
     _version = version;
 
-    auto offsetFieldSize = (version >> 8) & 0xff;
+    auto offsetFieldSize = reader.PeekUInt8(offset + 5);
+    auto cueidFieldSize = reader.PeekUInt16LE(offset + 6);
     uint32_t offsetMask = 0;
 
     for (auto i = 0; i < offsetFieldSize; ++i) {
@@ -83,13 +84,13 @@ void CAfs2Archive::Initialize() {
     }
 
     auto prevCueId = InvalidCueId;
-    auto fileOffsetFieldBase = 0x10 + fileCount * 2;
+    auto fileOffsetFieldBase = 0x10 + fileCount * cueidFieldSize;
 
     for (uint32_t i = 0; i < fileCount; ++i) {
         auto currentOffsetFieldBase = fileOffsetFieldBase + offsetFieldSize * i;
         AFS2_FILE_RECORD record = {0};
 
-        record.cueId = reader.PeekUInt16LE(offset + (0x10 + 2 * i));
+        record.cueId = reader.PeekUInt16LE(offset + (0x10 + cueidFieldSize * i));
         record.fileOffsetRaw = reader.PeekUInt32LE(offset + currentOffsetFieldBase);
 
         record.fileOffsetRaw &= offsetMask;
