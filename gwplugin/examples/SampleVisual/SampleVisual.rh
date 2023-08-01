@@ -1,0 +1,8 @@
+/*
+ * SampleWave identifiers for properties window resources
+ */
+
+#define IDD_WAVEPROPS	1
+#define IDC_WAVECOLOUR	101
+#define IDC_BACKCOLOUR	102
+

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{3c18f4fc-dca4-4fa1-8a4c-53f44b06f1e5}</ProjectGuid>
+    <RootNamespace>libcgss</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>cgss</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>cgss</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>cgss</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>cgss</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__CGSS_BUILDING_DLL__;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__CGSS_BUILDING_DLL__;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__CGSS_BUILDING_DLL__;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__CGSS_BUILDING_DLL__;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\lib\capi\CHandleManager.h" />
+    <ClInclude Include="src\lib\cdata\ACB_CUE_RECORD.h" />
+    <ClInclude Include="src\lib\cdata\AFS2_FILE_RECORD.h" />
+    <ClInclude Include="src\lib\cdata\HCA_CIPHER_CONFIG.h" />
+    <ClInclude Include="src\lib\cdata\HCA_DECODER_CONFIG.h" />
+    <ClInclude Include="src\lib\cdata\HCA_INFO.h" />
+    <ClInclude Include="src\lib\cdata\UTF_FIELD.h" />
+    <ClInclude Include="src\lib\cdata\UTF_HEADER.h" />
+    <ClInclude Include="src\lib\cdata\UTF_ROW.h" />
+    <ClInclude Include="src\lib\cdata\UTF_TABLE.h" />
+    <ClInclude Include="src\lib\cgss_api.h" />
+    <ClInclude Include="src\lib\cgss_capi.h" />
+    <ClInclude Include="src\lib\cgss_cdata.h" />
+    <ClInclude Include="src\lib\cgss_cenum.h" />
+    <ClInclude Include="src\lib\cgss_data.h" />
+    <ClInclude Include="src\lib\cgss_enum.h" />
+    <ClInclude Include="src\lib\cgss_env.h" />
+    <ClInclude Include="src\lib\cgss_intf.h" />
+    <ClInclude Include="src\lib\common\quick_utils.h" />
+    <ClInclude Include="src\lib\ichinose\CAcbFile.h" />
+    <ClInclude Include="src\lib\ichinose\CAcbHelper.h" />
+    <ClInclude Include="src\lib\ichinose\CAfs2Archive.h" />
+    <ClInclude Include="src\lib\ichinose\CUtfField.h" />
+    <ClInclude Include="src\lib\ichinose\CUtfReader.h" />
+    <ClInclude Include="src\lib\ichinose\CUtfTable.h" />
+    <ClInclude Include="src\lib\jni\cgss_jni.h" />
+    <ClInclude Include="src\lib\jni\jni_helper.hpp" />
+    <ClInclude Include="src\lib\kawashima\hca\CDefaultWaveGenerator.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaCipherConfig.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaCipherConverter.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaDecoder.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaDecoderConfig.h" />
+    <ClInclude Include="src\lib\kawashima\hca\CHcaFormatReader.h" />
+    <ClInclude Include="src\lib\kawashima\hca\hca_native.h" />
+    <ClInclude Include="src\lib\kawashima\hca\hca_utils.h" />
+    <ClInclude Include="src\lib\kawashima\hca\internal\CHcaAth.h" />
+    <ClInclude Include="src\lib\kawashima\hca\internal\CHcaChannel.h" />
+    <ClInclude Include="src\lib\kawashima\hca\internal\CHcaCipher.h" />
+    <ClInclude Include="src\lib\kawashima\hca\internal\CHcaData.h" />
+    <ClInclude Include="src\lib\kawashima\wave\wave_native.h" />
+    <ClInclude Include="src\lib\takamori\CBitConverter.h" />
+    <ClInclude Include="src\lib\takamori\CFileSystem.h" />
+    <ClInclude Include="src\lib\takamori\CPath.h" />
+    <ClInclude Include="src\lib\takamori\exceptions\CArgumentException.h" />
+    <ClInclude Include="src\lib\takamori\exceptions\CException.h" />
+    <ClInclude Include="src\lib\takamori\exceptions\CFormatException.h" />
+    <ClInclude Include="src\lib\takamori\exceptions\CInvalidOperationException.h" />
+    <ClInclude Include="src\lib\takamori\exceptions\CNotImplementedException.h" />
+    <ClInclude Include="src\lib\takamori\streams\CBinaryReader.h" />
+    <ClInclude Include="src\lib\takamori\streams\CBinaryWriter.h" />
+    <ClInclude Include="src\lib\takamori\streams\CFileStream.h" />
+    <ClInclude Include="src\lib\takamori\streams\CMemoryStream.h" />
+    <ClInclude Include="src\lib\takamori\streams\CStream.h" />
+    <ClInclude Include="src\lib\takamori\streams\CStreamExtensions.h" />
+    <ClInclude Include="src\lib\takamori\streams\IStream.h" />
+    <ClInclude Include="src\lib\takamori\Utilities.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\lib\capi\cgss_capi.cpp" />
+    <ClCompile Include="src\lib\capi\CHandleManager.cpp" />
+    <ClCompile Include="src\lib\ichinose\CAcbFile.cpp" />
+    <ClCompile Include="src\lib\ichinose\CAcbHelper.cpp" />
+    <ClCompile Include="src\lib\ichinose\CAfs2Archive.cpp" />
+    <ClCompile Include="src\lib\ichinose\CUtfField.cpp" />
+    <ClCompile Include="src\lib\ichinose\CUtfReader.cpp" />
+    <ClCompile Include="src\lib\ichinose\CUtfTable.cpp" />
+    <ClCompile Include="src\lib\jni\cgss_jni.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\lib\kawashima\hca\CDefaultWaveGenerator.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaCipherConfig.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaCipherConverter.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaDecoder.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaDecoderConfig.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\CHcaFormatReader.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\hca_utils.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\internal\CHcaAth.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\internal\CHcaChannel.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\internal\CHcaCipher.cpp" />
+    <ClCompile Include="src\lib\kawashima\hca\internal\CHcaData.cpp" />
+    <ClCompile Include="src\lib\takamori\CBitConverter.cpp" />
+    <ClCompile Include="src\lib\takamori\CFileSystem.cpp" />
+    <ClCompile Include="src\lib\takamori\CPath.cpp" />
+    <ClCompile Include="src\lib\takamori\exceptions\CArgumentException.cpp" />
+    <ClCompile Include="src\lib\takamori\exceptions\CException.cpp" />
+    <ClCompile Include="src\lib\takamori\exceptions\CFormatException.cpp" />
+    <ClCompile Include="src\lib\takamori\exceptions\CInvalidOperationException.cpp" />
+    <ClCompile Include="src\lib\takamori\exceptions\CNotImplementedException.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CBinaryReader.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CBinaryWriter.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CFileStream.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CMemoryStream.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CStream.cpp" />
+    <ClCompile Include="src\lib\takamori\streams\CStreamExtensions.cpp" />
+    <ClCompile Include="src\lib\takamori\Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\code\repo\libcgss\src\cgss.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

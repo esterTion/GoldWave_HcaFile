@@ -1,0 +1,11 @@
+/*
+	SampleEffect Copyright 2004 GoldWave Inc.
+	Identifiers for dialog and icon resources
+ */
+
+#define IDI_DLL				1
+#define IDI_SAMPLEINVERT	2
+#define IDI_SAMPLEVOLUME	3
+#define IDD_VOLUMESETTING	1
+#define IDC_VOLUME			101
+

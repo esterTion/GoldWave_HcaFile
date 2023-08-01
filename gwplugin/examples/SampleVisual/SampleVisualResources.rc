@@ -1,0 +1,17 @@
+/*
+	SampleVisual Copyright 2003-2008 GoldWave Inc.
+	Resource for SampleWave Properties window.
+ */
+
+#include "SampleVisual.rh"
+
+IDD_WAVEPROPS DIALOGEX 0, 0, 137, 36
+STYLE DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Waveform colour:", -1, "static", SS_RIGHT | WS_CHILD | WS_VISIBLE, 10, 6, 64, 8
+ CONTROL "", IDC_WAVECOLOUR, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 77, 4, 50, 89
+ CONTROL "Background colour:", -1, "static", SS_RIGHT | WS_CHILD | WS_VISIBLE, 10, 23, 64, 8
+ CONTROL "", IDC_BACKCOLOUR, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 77, 21, 50, 89
+}
+

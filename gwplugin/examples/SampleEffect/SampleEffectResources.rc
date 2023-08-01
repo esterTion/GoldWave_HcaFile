@@ -1,0 +1,18 @@
+/*
+	SampleEffect Copyright (c) 2004-2008 GoldWave Inc.
+	Resource for SampleVolume dialog and icons.
+ */
+
+#include "SampleEffect.rh"
+
+IDD_VOLUMESETTING DIALOGEX 0, 0, 88, 20
+STYLE DS_CONTROL | WS_CHILD
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Volume:", -1, "static", SS_RIGHT | WS_CHILD | WS_VISIBLE, 3, 4, 33, 8
+ CONTROL "", IDC_VOLUME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 40, 3, 40, 12
+}
+
+IDI_DLL ICON "SampleEffectDllIcon.ico"
+IDI_SAMPLEINVERT ICON "SampleInvertIcon.ico"
+IDI_SAMPLEVOLUME ICON "SampleVolumeIcon.ico"
