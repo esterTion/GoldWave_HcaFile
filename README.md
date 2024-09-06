@@ -7,6 +7,6 @@
 With help from [@EAirPeter](https://github.com/EAirPeter)
 
 Credits:  
-GoldWave Plug-in SDK: http://www.goldwave.com/developer.php
-libcgss: https://github.com/hozuki/libcgss
+GoldWave Plug-in SDK: http://www.goldwave.com/developer.php  
+libcgss: https://github.com/hozuki/libcgss  
 
